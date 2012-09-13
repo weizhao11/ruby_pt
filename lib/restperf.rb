@@ -6,31 +6,24 @@ require 'digest/md5'
 module Rest
   module Perf
 
-    API_PREFIX = "/api/sixin/3.0"
+    API_PREFIX = ""
     LIMIT_LENGTH = 50.freeze
     PASSWORD = "123456".freeze
-#   PASSWORD = "000000".freeze
-#    USER1 = "wp.daizhize@renren-inc.com".freeze
-#    USER1 = "yongshuai.yan@renren-inc.com".freeze
-#    USER1 = "tao.ma@renren-inc.com".freeze
-    USER1 = "jie.liang@renren-inc.com".freeze
-#    USER1 = "xnlinqsh@163.com".freeze
-#    USER1 = "xnqiush@163.com".freeze
-#    ACCESS_TOKEN = "AAAHJ8TLIS1MBAETe1jvMJ3dr7StESckosZBu5TqQIk1UdeGWQ2ZA2KZBfB6fPwGi26iqzMlHuudTwKZB6cVTYZAZAEgGVYf3R9zdqegqutNwZDZD"
+    USER1 = "user".freeze
 
-    #zhaowei token
-    ACCESS_TOKEN = "AAACEdEose0cBAMZAtZBUhtIRicqvYUEZCGkEVrUz7QolsulA1ApgUUOALLZC38LUct9asldaDsZCnecErqkXwdrZARgU6mZAT1jZBwfHf6vjcQZDZD"
+    #token
+    ACCESS_TOKEN = ""
 
     ACTIONS = [
-#      :loginrenren,
-#       :login,
-       :loginfb,
-       :profile_by_id
-#       :photo
-#      :captcha,
-#      :register
-#      :unbindfacebook,
-#      :bindfacebook,
+      :loginrenren,
+      :login,
+      :loginfb,
+      :profile_by_id
+      :photo,
+      :captcha,
+      :register
+      :unbindfacebook,
+      :bindfacebook,
     ]
 
     class Bag
