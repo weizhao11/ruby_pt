@@ -30,12 +30,7 @@ puts "Starting #{number_of_users} users..."
 
 threads = []
 
-#loginUrl = ['http://123.125.47.196', 'http://ec2-23-20-72-177.compute-1.amazonaws.com']
-#loginUrl = ['http://ec2-107-22-143-143.compute-1.amazonaws.com:8080']
-#loginUrl = ['http://ec2-23-22-235-9.compute-1.amazonaws.com:8080']
-loginUrl = ['http://23.21.65.62']
-#loginUrl = ['http://10.3.24.189:8080']
-#loginUrl = ['http://ec2-23-20-72-177.compute-1.amazonaws.com']
+loginUrl = ['a.b.c.d']
 
 loginUrl.each do |x|
   1.upto(number_of_users) do |i|
