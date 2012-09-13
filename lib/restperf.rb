@@ -8,6 +8,9 @@ module Rest
 
     API_PREFIX = ""
     LIMIT_LENGTH = 50.freeze
+    DEFAULT_APIKEY = "aaa1".freeze
+    DEFAULT_SECKEY = "bbb1".freeze
+    CALL_ID = "1.0".freeze
     PASSWORD = "123456".freeze
     USER1 = "user".freeze
 
@@ -60,11 +63,10 @@ module Rest
         t1 = Time.new
         pass = Digest::MD5.hexdigest(PASSWORD)
         response = @conn.post API_PREFIX + '/user/login' do |req|
-          req.params[:api_key] = 'aaa1'
-          req.params[:call_id] = '1.0'
+          req.params[:api_key] = DEFAULT_APIKEY
+          req.params[:call_id] = CALL_ID
           req.params[:password] = pass
           req.params[:user] = USER1
-          req.params[:sig] = genSig(req.params, 'bbb1')
         end
         puts response.status.to_s
         puts response.body.to_s
@@ -79,11 +81,11 @@ module Rest
       def loginfb
         t1 = Time.new
         response = @conn.post API_PREFIX + '/user/login/facebook' do |req|
-          req.params[:api_key] = 'aaa1'
-          req.params[:call_id] = '1.0'
+          req.params[:api_key] = DEFAULT_APIKEY
+          req.params[:call_id] = CALL_ID
           req.params[:access_token] = ACCESS_TOKEN
           req.params[:expires] = '6000'
-          req.params[:sig] = genSig(req.params, 'bbb1')
+          req.params[:sig] = genSig(req.params, DEFAULT_SECKEY)
         end
 
         puts response.status.to_s
@@ -101,11 +103,11 @@ module Rest
         pass = Digest::MD5.hexdigest(PASSWORD)
 
         response = @conn.post API_PREFIX + '/user/login/renren' do |req|
-          req.params[:api_key] = 'aaa1'
-          req.params[:call_id] = '1.0'
+          req.params[:api_key] = DEFAULT_APIKEY
+          req.params[:call_id] = CALL_ID
           req.params[:password] = pass
           req.params[:user] = '13810436416'
-          req.params[:sig] = genSig(req.params, 'bbb1')
+          req.params[:sig] = genSig(req.params, DEFAULT_SECKEY)
         end
 
         puts response.status.to_s
@@ -118,12 +120,12 @@ module Rest
       def captcha
         t1 = Time.new
         response = @conn.post API_PREFIX + '/user/register/captcha' do |req|
-          req.params[:api_key] = 'aaa1'
-          req.params[:call_id] = '1.0'
+          req.params[:api_key] = DEFAULT_APIKEY
+          req.params[:call_id] = CALL_ID
           req.params[:user] = USER1
 #          req.params[:action] = 'GET'
           req.params[:captcha] = '79775'
-          req.params[:sig] = genSig(req.params, 'bbb1')
+          req.params[:sig] = genSig(req.params, DEFAULT_SECKEY)
         end
         puts response.status.to_s
         puts response.body.to_s
@@ -136,12 +138,12 @@ module Rest
         t1 = Time.new
         pass = Digest::MD5.hexdigest(PASSWORD)
         response = @conn.post API_PREFIX + '/user/register' do |req|
-          req.params[:api_key] = 'aaa1'
-          req.params[:call_id] = '1.0'
+          req.params[:api_key] = DEFAULT_APIKEY
+          req.params[:call_id] = CALL_ID
           req.params[:password] = pass
           req.params[:user] = USER1
           req.params[:captcha] = '79775'
-          req.params[:sig] = genSig(req.params, 'bbb1')
+          req.params[:sig] = genSig(req.params, DEFAULT_SECKEY)
         end
         puts response.status.to_s
         puts response.body.to_s
@@ -151,8 +153,8 @@ module Rest
       def bindfacebook
         t1 = Time.new
         response = @conn.post API_PREFIX + '/user/binding/facebook' do |req|
-          req.params[:api_key] = 'aaa1'
-          req.params[:call_id] = '1.0'
+          req.params[:api_key] = DEFAULT_APIKEY
+          req.params[:call_id] = CALL_ID
           req.params[:access_token] = ACCESS_TOKEN
           req.params[:expires] = '6000'
           req.params[:session_key] = @session_key
@@ -166,8 +168,8 @@ module Rest
       def unbindfacebook
         t1 = Time.new
         response = @conn.post API_PREFIX + '/user/binding/facebook/' + @user_id do |req|
-          req.params[:api_key] = 'aaa1'
-          req.params[:call_id] = '1.0'
+          req.params[:api_key] = DEFAULT_APIKEY
+          req.params[:call_id] = CALL_ID
           req.params[:action] = 'DELETE'
           req.params[:session_key] = @session_key
           req.params[:sig] = genSig(req.params, @secret_key)
@@ -182,8 +184,8 @@ module Rest
         file = Faraday::UploadIO.new('chart.png', 'image/png')
         puts "-----------" + file.to_s
         temp = {}
-        temp[:api_key] = 'aaa1'
-        temp[:call_id] = '1.0'
+        temp[:api_key] = DEFAULT_APIKEY
+        temp[:call_id] = CALL_ID
         temp[:session_key] = @session_key
         img = Faraday::UploadIO.new('chart.png', 'image/png')
         response = @conn.post API_PREFIX + '/file/photo' do |req|
@@ -200,8 +202,8 @@ module Rest
         t1 = Time.new
         puts "sss: " + @user_id.to_s
         response = @conn.post API_PREFIX + '/user/profile/' + @user_id.to_s do |req|
-          req.params[:api_key] = 'aaa1'
-          req.params[:call_id] = '1.0'
+          req.params[:api_key] = DEFAULT_APIKEY
+          req.params[:call_id] = CALL_ID
           req.params[:action] = 'GET'
           req.params[:session_key] = @session_key
           req.params[:sig] = genSig(req.params, @secret_key)
